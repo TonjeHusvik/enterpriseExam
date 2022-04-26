@@ -39,4 +39,5 @@ class UserService(@Autowired private val userRepo: UserRepo,
     fun getAuthority(name: String): AuthorityEntity {
         return authorityRepo.getByAuthorityName(name)
     }
+
 }

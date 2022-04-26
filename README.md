@@ -1,8 +1,9 @@
 # enterpriseExam 2022
 
 ## TODO
-- [] Change /api/authorization to /api/authentication 
-- [] Make several users with different authorization
+- [x] Change /api/authorization /api/authority to /api/authentication 
+- [x] Make several users with different authorization
+- [] Make users authorities show USER and ADMIN
 - [] Set which authorities have access to which endpoints
 - [] Make unit tests
 - [] Make integration tests

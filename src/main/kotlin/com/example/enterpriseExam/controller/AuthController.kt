@@ -17,7 +17,8 @@ class AuthController(@Autowired private val userService: UserService,
                      @Autowired private val authorityService: AuthorityService
 ) {
 
-    @GetMapping("/authority/all")
+    // DOESN'T GET PERMISSION TO GO HERE
+    @GetMapping("/authentication/all")
     fun getAuthorities(): ResponseEntity<List<AuthorityEntity>> {
         return ResponseEntity.ok().body(authorityService.getAuthorities())
     }
@@ -31,7 +32,7 @@ class AuthController(@Autowired private val userService: UserService,
     fun registerUser(@RequestBody newUserInfo: NewUserInfo): ResponseEntity<UserEntity>{
         val createdUser = userService.registerUser(newUserInfo)
         val uri = URI.create(
-            ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/register/authority").toUriString()
+            ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/register/authentication").toUriString()
         )
         return ResponseEntity.created(uri).body(createdUser)
     }
