@@ -44,7 +44,7 @@ class AuthControllerUnitTest {
         every { userService.getUsers() } answers {
             mutableListOf(userBob)
         }
-        mockMvc.get("/api/user/all"){
+        mockMvc.get("/api/user"){
 
         }
             .andExpect { status { isOk() } }

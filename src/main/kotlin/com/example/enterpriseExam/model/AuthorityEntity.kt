@@ -16,7 +16,7 @@ class AuthorityEntity(
     val id: Long? = null,
 
     @Column(name = "authority_name")
-    val authorityName: String
+    var authorityName: String
 ) {
     override fun toString(): String {
         return "AuthorityEntity(id=$id, authorityName='$authorityName')"

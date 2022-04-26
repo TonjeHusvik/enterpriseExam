@@ -3,7 +3,6 @@ package com.example.enterpriseExam.service
 import com.example.enterpriseExam.NewUserInfo
 import com.example.enterpriseExam.model.AuthorityEntity
 import com.example.enterpriseExam.model.UserEntity
-import com.example.enterpriseExam.repo.AnimalRepo
 import com.example.enterpriseExam.repo.AuthorityRepo
 import com.example.enterpriseExam.repo.UserRepo
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,7 +20,7 @@ class UserService(@Autowired private val userRepo: UserRepo,
     override fun loadUserByUsername(username: String?): UserDetails {
         username?.let{
             val user = userRepo.findByEmail(it)
-            return User(user.email, user.password, user.authorities.map { SimpleGrantedAuthority(it.authorityName) })
+            return User(user.email, user.password, user.authorities.map { authority -> SimpleGrantedAuthority(authority.authorityName) })
         }
         throw Exception("Cant find any users")
     }
@@ -43,5 +42,12 @@ class UserService(@Autowired private val userRepo: UserRepo,
     fun getUserByEmail(email: String): UserEntity? {
         return userRepo.findByEmail(email)
     }
+
+    /*fun grantAuthorityToUser(email: String, authorityName: String){
+        val user = userRepo.findByEmail(email)
+        val authority = authorityRepo.getByAuthorityName(authorityName)
+        user.authorities.add(authority)
+        userRepo.save(user)
+    }*/
 
 }

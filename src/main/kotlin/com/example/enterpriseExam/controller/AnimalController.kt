@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*
 class AnimalController(@Autowired private val animalService: AnimalService) {
 
     //GETS ALL - WORKS
-    @GetMapping("/shelter/all")
+    @GetMapping("/shelter")
     fun getAnimals(): ResponseEntity<List<AnimalEntity>> {
         return ResponseEntity.ok().body(animalService.getAnimals())
     }
@@ -23,19 +23,19 @@ class AnimalController(@Autowired private val animalService: AnimalService) {
     }
 
     //ADD NEW ANIMAL - WORKS
-    @PostMapping("/shelter/all")
+    @PostMapping("/shelter/edit/updateAnimal")
     fun addNewAnimal(@RequestBody newAnimal: AnimalEntity): AnimalEntity {
         return animalService.addNewAnimal(newAnimal)
     }
 
     //UPDATE ONE ANIMAL BY ID
-    @PutMapping("/shelter/all/{id}")
+    @PutMapping("/shelter/edit/{id}")
     fun updateAnimal(@PathVariable("id") id: Long, @RequestBody newAnimal: AnimalEntity): ResponseEntity<AnimalEntity> {
         return ResponseEntity.ok().body(animalService.updateAnimal(id, newAnimal))
     }
 
     //DELETE ONE ANIMAL BY ID
-    @DeleteMapping("/shelter/all/{id}")
+    @DeleteMapping("/shelter/edit/{id}")
     fun deleteAnimal(@PathVariable("id") id: Long) {
         return animalService.deleteAnimal(id)
     }

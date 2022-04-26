@@ -23,7 +23,7 @@ class AuthController(@Autowired private val userService: UserService,
         return ResponseEntity.ok().body(authorityService.getAuthorities())
     }
 
-    @GetMapping("/user/all")
+    @GetMapping("/user")
     fun getUsers(): ResponseEntity<List<UserEntity>> {
         return ResponseEntity.ok().body(userService.getUsers())
     }
@@ -35,5 +35,12 @@ class AuthController(@Autowired private val userService: UserService,
             ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/register/authentication").toUriString()
         )
         return ResponseEntity.created(uri).body(createdUser)
+    }
+
+    @PutMapping("/user/edituser/{id}")
+    fun updateAuthority(@PathVariable("id") id: Long, @RequestBody anotherAuthority: AuthorityEntity): ResponseEntity<AuthorityEntity> {
+        //authorityService.grantAuthorityToUser(authorityToUser.email, authorityToUser.authority)
+        //return ResponseEntity.ok().build()
+        return ResponseEntity.ok().body(authorityService.updateAuthority(id, anotherAuthority))
     }
 }
