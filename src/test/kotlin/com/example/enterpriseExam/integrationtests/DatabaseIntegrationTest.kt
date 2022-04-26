@@ -42,4 +42,16 @@ class DatabaseIntegrationTest(@Autowired private val userService: UserService) {
         val foundUser = userService.getUserByEmail("george@ted.ted")
         assert(foundUser?.email == "george@ted.ted")
     }
+
+    /*alots of test with animals*/
+
+    @Test
+    fun createAndFindUserTest(){
+        userService.registerUser(NewUserInfo("jim@jimbob.com", "pirate"))
+        val createdUser = userService.loadUserByUsername("jim@jimbob.com")
+        assert(createdUser.username == "jim@jimbob.com")
+        assert(createdUser.authorities.first().authority == "USER")
+    }
+
+
 }

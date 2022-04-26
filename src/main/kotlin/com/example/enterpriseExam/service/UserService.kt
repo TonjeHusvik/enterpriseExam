@@ -43,11 +43,4 @@ class UserService(@Autowired private val userRepo: UserRepo,
         return userRepo.findByEmail(email)
     }
 
-    /*fun grantAuthorityToUser(email: String, authorityName: String){
-        val user = userRepo.findByEmail(email)
-        val authority = authorityRepo.getByAuthorityName(authorityName)
-        user.authorities.add(authority)
-        userRepo.save(user)
-    }*/
-
 }
