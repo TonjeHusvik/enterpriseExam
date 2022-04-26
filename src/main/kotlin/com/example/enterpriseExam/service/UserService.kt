@@ -21,7 +21,7 @@ class UserService(@Autowired private val userRepo: UserRepo,
     override fun loadUserByUsername(username: String?): UserDetails {
         username?.let{
             val user = userRepo.findByEmail(it)
-            return User(user?.email, user?.password, user?.authorities?.map { SimpleGrantedAuthority(it.authorityName) })
+            return User(user.email, user.password, user.authorities.map { SimpleGrantedAuthority(it.authorityName) })
         }
         throw Exception("Cant find any users")
     }
@@ -38,6 +38,10 @@ class UserService(@Autowired private val userRepo: UserRepo,
 
     fun getAuthority(name: String): AuthorityEntity {
         return authorityRepo.getByAuthorityName(name)
+    }
+
+    fun getUserByEmail(email: String): UserEntity? {
+        return userRepo.findByEmail(email)
     }
 
 }

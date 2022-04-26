@@ -26,7 +26,7 @@ class UserEntity(
     val created: LocalDateTime? = LocalDateTime.now(),
 
     @Column(name = "user_enabled")
-    val enabled: Boolean? = true,
+    val enabled: Boolean = true, //Sjekke om den skal ha ? eller ikke
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
