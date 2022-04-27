@@ -17,7 +17,6 @@ class AuthController(@Autowired private val userService: UserService,
                      @Autowired private val authorityService: AuthorityService
 ) {
 
-    // DOESN'T GET PERMISSION TO GO HERE
     @GetMapping("/authentication/all")
     fun getAuthorities(): ResponseEntity<List<AuthorityEntity>> {
         return ResponseEntity.ok().body(authorityService.getAuthorities())
@@ -39,8 +38,6 @@ class AuthController(@Autowired private val userService: UserService,
 
     @PutMapping("/user/edituser/{id}")
     fun updateAuthority(@PathVariable("id") id: Long, @RequestBody anotherAuthority: AuthorityEntity): ResponseEntity<AuthorityEntity> {
-        //authorityService.grantAuthorityToUser(authorityToUser.email, authorityToUser.authority)
-        //return ResponseEntity.ok().build()
         return ResponseEntity.ok().body(authorityService.updateAuthority(id, anotherAuthority))
     }
 }

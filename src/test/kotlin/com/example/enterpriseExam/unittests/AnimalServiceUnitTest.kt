@@ -13,29 +13,71 @@ class AnimalServiceUnitTest {
 
     @Test
     fun getAnimalsTest() {
-        val animal1 = AnimalEntity(name = "Pepsi", animalType = "Cat", breed = "Maine Coon", age = 12, health =  "Fine")
-        val animal2 = AnimalEntity(name = "Henry", animalType = "Hamster", breed = "Irish disaster", age = 2, health =  "Makes weird noises")
+        val animal1 = AnimalEntity(name = "pepsi", animalType = "cat", breed = "maine coon", age = 12, health =  "fine")
+        val animal2 = AnimalEntity(name = "henry", animalType = "hamster", breed = "irish disaster", age = 2, health =  "makes weird noises")
 
         every { animalRepo.findAll() } answers {
             mutableListOf(animal1, animal2)
         }
 
-        val users = animalService.getAnimals()
-        assert(users.size == 2)
+        val animals = animalService.getAnimals()
+        assert(animals.size == 2)
     }
 
     @Test
-    fun shouldRegisterNewAnimal() {
-        // mocking out responses from save())
+    fun getAnimalByIdTest() {
+        val animal = AnimalEntity(name = "couch", animalType = "dog", breed = "labrador", age = 10, health =  "super")
+        every { animalRepo.getById(1)} answers {
+            animal
+        }
+
+        val singleAnimal = animalService.getSingleAnimal(1)
+        assert(singleAnimal.name == "couch")
+        assert(singleAnimal.animalType == "dog")
+    }
+
+
+    @Test
+    fun shouldAddNewAnimal() {
         every { animalRepo.save(any()) }  answers {
-            // returns whatever we pass to it
             firstArg()
         }
 
-        val createUser = animalService.addNewAnimal(AnimalEntity(name = "Barbie", animalType = "Pig", breed = "Mock pig", age = 7, health =  "Smells bad"))
+        val addAnimal = animalService.addNewAnimal(AnimalEntity(name = "barbie", animalType = "pig", breed = "mock pig", age = 7, health =  "smells bad"))
 
-        assert(createUser.name == "Barbie")
-        assert(createUser.animalType == "Pig")
-        assert(createUser.breed == "Mock pig")
+        assert(addAnimal.name == "barbie")
+        assert(addAnimal.animalType == "pig")
+        assert(addAnimal.breed == "mock pig")
+        assert(addAnimal.age == 7)
+        assert(addAnimal.health == "smells bad")
+    }
+
+    @Test
+    fun shouldUpdateAnimal() {
+        val animal = AnimalEntity(id = 1, name = "diaper", animalType = "cow", breed = "spotted christian", age = 7, health =  "bad")
+        every { animalRepo.getById(any()) }  answers {
+            animal
+        }
+        every { animalRepo.save(any()) }  answers {
+            animal
+        }
+
+        val editedAnimal = animalService.updateAnimal(
+            1, AnimalEntity(id = 1, name = "diaper", animalType = "cow", breed = "spotted christian", age = 8, health =  "worse"))
+        assert(editedAnimal.name == "diaper")
+        assert(editedAnimal.animalType == "cow")
+        assert(editedAnimal.breed == "spotted christian")
+        assert(editedAnimal.age == 8)
+        assert(editedAnimal.health == "worse")
+    }
+
+    @Test
+    fun shouldDeleteAnimal() {
+        val animal = AnimalEntity(id = 1, name = "bull", animalType = "bull", breed = "black dark", age = 8, health =  "smells worse")
+        every { animalRepo.deleteById(any()) }  answers {
+            animal
+        }
+
+        animalService.deleteAnimal(1)
     }
 }

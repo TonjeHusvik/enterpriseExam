@@ -33,9 +33,7 @@ class AnimalService(@Autowired private val animalRepo: AnimalRepo) {
     }
 
     fun deleteAnimal(id: Long) {
-        return if (animalRepo.existsById(id)) {
-            animalRepo.deleteById(id)
-        } else throw Exception("No matching animal found")
+        return animalRepo.deleteById(id)
     }
 
 }

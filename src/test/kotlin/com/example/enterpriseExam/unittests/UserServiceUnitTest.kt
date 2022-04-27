@@ -17,35 +17,46 @@ class UserServiceUnitTest {
 
     @Test
     fun getUsersTest() {
-        val userJoe = UserEntity(email = "joe@bob.com", password = "pirate")
-        val userJim = UserEntity(email = "jim@bob.com", password = "pirate")
+        val userJoe = UserEntity(email = "test@test.com", password = "password")
+        val userJim = UserEntity(email = "test2@test.com", password = "password")
 
-        // mocking out responses from findAll() in getUsers()
         every { userRepo.findAll() } answers {
             mutableListOf(userJoe, userJim)
         }
 
         val users = userService.getUsers()
         assert(users.size == 2)
-        assert(users.first { it.email == "jim@bob.com" }.password == "pirate")
+        assert(users.first { it.email == "test@test.com" }.password == "password")
     }
 
     @Test
     fun shouldRegisterNewUser() {
-        // mocking out responses from save() (doing this for all functions in registerUser())
         every { userRepo.save(any()) }  answers {
-            // returns whatever we pass to it
             firstArg()
         }
 
-        // mocking out responses from getByAuthorityName()
         every { authorityRepo.getByAuthorityName(any()) } answers {
             AuthorityEntity(authorityName = "USER")
         }
 
-        val createUser = userService.registerUser(NewUserInfo("dumb@ass.com", "beaniebaby"))
+        val createUser = userService.registerUser(NewUserInfo("test@test.com", "password"))
 
-        assert(createUser.email == "dumb@ass.com")
+        assert(createUser.email == "test@test.com")
         assert(createUser.enabled)
     }
+
+    @Test
+    fun getUserByEmailTest() {
+        val user = UserEntity(email = "test@test.com", password = "password")
+
+        every { userRepo.findByEmail("test@test.com") } answers {
+            user
+        }
+
+        val users = userService.getUserByEmail("test@test.com")
+        assert(users?.email == "test@test.com")
+
+    }
+
+
 }

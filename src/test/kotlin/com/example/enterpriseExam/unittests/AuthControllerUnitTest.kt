@@ -14,12 +14,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
-import org.springframework.http.MediaType
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.post
+import org.springframework.test.web.servlet.put
 
 @WebMvcTest
 @AutoConfigureMockMvc(addFilters = false)
@@ -48,7 +48,7 @@ class AuthControllerUnitTest {
 
     @Test
     fun shouldGetAllUsers() {
-        val userBob = UserEntity(email = "bob@bob.com", password = "password")
+        val userBob = UserEntity(email = "test@test.com", password = "password")
         every { userService.getUsers() } answers {
             mutableListOf(userBob)
         }
@@ -56,24 +56,49 @@ class AuthControllerUnitTest {
 
         }
             .andExpect { status { isOk() } }
-            .andExpect { content { contentType(MediaType.APPLICATION_JSON) } }
+            .andExpect { content { contentType(APPLICATION_JSON) } }
+    }
+
+    @Test
+    fun shouldGetAllAuthorities() {
+        val authority = AuthorityEntity(id = 1, authorityName = "USER")
+        every { authorityService.getAuthorities() } answers {
+            mutableListOf(authority)
+        }
+        mockMvc.get("/api/authentication/all"){
+
+        }
+            .andExpect { status { isOk() } }
+            .andExpect { content { contentType(APPLICATION_JSON) } }
+    }
+
+    @Test
+    fun shouldUpdateAuthority() {
+        val authority = AuthorityEntity(id = 1, authorityName = "USER")
+        every { authorityService.updateAuthority(1, any()) } answers {
+            authority
+        }
+        mockMvc.put("/api/user/edituser/1"){
+            contentType = APPLICATION_JSON
+            content = "{\"authorityName\":\"ADMIN\"}"
+
+        }
+            .andExpect { status { isOk() } }
+            .andExpect { content { contentType(APPLICATION_JSON) } }
     }
 
     @Test
     fun testRegisterEndpoint(){
-        every { userService.registerUser(NewUserInfo("jim@bob.com", "pirate")) } answers {
-            val user = UserEntity(id = 1, email = "jim@bob.com", password = BCryptPasswordEncoder().encode("pirate"))
+        every { userService.registerUser(NewUserInfo("test@test.com", "password")) } answers {
+            val user = UserEntity(id = 1, email = "test@test.com", password = BCryptPasswordEncoder().encode("pirate"))
             user
         }
 
         mockMvc.post("/api/register"){
             contentType = APPLICATION_JSON
-            content = "{\"email\":\"jim@bob.com\", \"password\":\"pirate\"}"
+            content = "{\"email\":\"test@test.com\", \"password\":\"password\"}"
         }
             .andExpect { status { isCreated() } }
             .andExpect { content { contentType(APPLICATION_JSON) } }
     }
-
-
-
 }

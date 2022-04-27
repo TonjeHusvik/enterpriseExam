@@ -36,7 +36,6 @@ class SecurityConfig(@Autowired private val userService: UserService,
             .antMatchers("/api/shelter").hasAnyAuthority("USER", "ADMIN")
             .antMatchers("/api/shelter/{id}").hasAnyAuthority("USER", "ADMIN")
             .antMatchers("/api/user/**").hasAuthority("ADMIN")
-            //.antMatchers("/api/shelter/edit/editAn").hasAuthority("ADMIN")
             .antMatchers("/api/shelter/edit/**").hasAuthority("ADMIN")
             .antMatchers("/api/authentication/**").hasAuthority("ADMIN")
         http.authorizeHttpRequests().anyRequest().authenticated()
