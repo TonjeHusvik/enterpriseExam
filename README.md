@@ -1,14 +1,25 @@
 # enterpriseExam
 
+## Frontend
+
+
+## Things I used to connect frontend and backend
+ - [] proxy
+
+## Backend
 Users with login-info
 Plot in localhost:8080/api/login in Postman and choose one of these to log in with.
-Username (email)	Password	Authority
-user@user.com	pirate	User
-admin@admin.com	pirate	Admin 
+
+
+
+| Username (email) | Password | 	Authority |
+|------------------|----------|------------|
+| user@user.com	   | pirate	  | User       |
+| admin@admin.com  | pirate	  | Admin      |
 
 Every endpoint starts with localhost:8080/api 
 
-endpoint	Example of JASON-input	Explanation	Authority
+| Endpoint |	Example of JASON-input |	Explanation	| Authority
 /login  	{
     "email": "user@user.com",
     "password": "pirate"
