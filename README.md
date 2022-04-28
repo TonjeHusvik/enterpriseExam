@@ -39,30 +39,27 @@ Every endpoint starts with localhost:8080/api
                                      "email":"new@user.com",
                                      "password":"password"
                                 }
-	
-/shelter/edit/{id}  
-(Swap id with number!)	{
-    "name": "nils",
-    "animalType": "tiger",
-    "breed": "brazilian fox",
-    "age": 25,
-    "health": "hungry, but fine"
-}
-	Update animal by id
-	admin
-/shelter/edit/{id}  
-(Swap id with number!)		delete animal by id	admin
-/user/edituser/{id}
+| /shelter/edit/{id}        |   {                                | Update animal by id          | admin      |
+(Swap id with number!)	
+                                     "name": "nils",
+                                     "animalType": "tiger",
+                                     "breed": "brazilian fox",
+                                     "age": 25,
+                                     "health": "hungry, but fine"
+                                }
+| /shelter/edit/{id}        |                                   | delete animal by id           | admin     |
+(Swap id with number!)		
+| /user/edituser/{id}       |  {                                | to edit user by id, for example to make a user with user authority to admin authority | admin |
 (Swap id with number!)
-(Works for both update and delete)	{
-    "id": 1,
-    "authorityName": "ADMIN"
-}	to edit user by id, for example to make a user with user authority to admin authority	admin
-/shelter/{id}
-(Swap id with number!)		to get an animal by id	all
-/shelter		to show all animals	all
-/user		to show all users	all
-/authentication/all		to show all authorities	admin
+(Works for both update and delete)	
+                                     "id": 1,
+                                     "authorityName": "ADMIN"
+                                }	
+| /shelter/{id}             |                                   | to get an animal by id        | all       |
+(Swap id with number!)		
+| /shelter                  |                              		| to show all animals	        | all       |
+| /user		                |                                   | to show all users	            | all       |
+| /authentication/all		|                                   | to show all authorities	    | admin     |
  
 
 When I first read the exam and saw the specifications, I got the idea that only a user with admin-authority should have the ability to post/delete and update an animal. In my mind a user with admin-authority could be an employee or owner of the shelter and they are using it do add, update or removing the animals at the shelter. A user is a possibly new animal-owner that is interested in getting an animal and therefore only have access to see information about them.
