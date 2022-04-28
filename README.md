@@ -19,28 +19,27 @@ Plot in localhost:8080/api/login in Postman and choose one of these to log in wi
 
 Every endpoint starts with localhost:8080/api 
 
-| Endpoint |	Example of JASON-input |	Explanation	| Authority
-/login  	{
-    "email": "user@user.com",
-    "password": "pirate"
-}	log in with user authority	all
-/login  	{
-    "email": "admin@admin.com",
-    "password": "pirate"
-}	log in with admin authority	all
-/shelter/edit/newanimal	{
-    "name": "cola",
-    "animalType": "cat",
-    "breed": "Polish mustache",
-    "age": 55,
-    "health": "old but gold"
-}	add a new animal	admin
-/register 	{
-    "email":"new@user.com",
-    "password":"password"
-}
-	to register new user
-	all
+| Endpoint                  |	Example of JASON-input           | Explanation	                | Authority  |
+| /login                    |   {                                | log in with user authority   | all        |
+                                     "email": "user@user.com",
+                                     "password": "pirate"
+                                }		
+| /login                    | 	{                                | log in with admin authority	| all        |
+                                     "email": "admin@admin.com",
+                                     "password": "pirate"
+                                }	
+| /shelter/edit/newanimal   |	{                                | add a new animal	            | admin      |
+                                     "name": "cola",
+                                     "animalType": "cat",
+                                     "breed": "Polish mustache",
+                                     "age": 55,
+                                     "health": "old but gold"
+                                }	
+| /register 	            |   {                                | to register new user         | all        |
+                                     "email":"new@user.com",
+                                     "password":"password"
+                                }
+	
 /shelter/edit/{id}  
 (Swap id with number!)	{
     "name": "nils",
