@@ -10,7 +10,7 @@ Plot in localhost:8080/api/login in Postman and choose one of these to log in wi
 <br/>
 Every endpoint starts with localhost:8080/api 
 
-| Endpoint                                                                   | 	Example of JASON-input                                                                                   | Explanation	                                                                          | Authority  |
+| Endpoint                                                                   | 	Example of JSON-input                                                                                   | Explanation	                                                                          | Authority  |
 |----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------| ---------- |
 | /login                                                                     | {<br/>"email": `"user@user.com"`,<br/>"password": "pirate"<br />}                                           | log in with user authority                                                            | all        |
 | /login                                                                     | 	{<br/>"email": `"admin@admin.com"`,<br/>"password": "pirate"<br/> }	                                               | log in with admin authority	                                                          | all        |
