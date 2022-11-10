@@ -31,6 +31,7 @@ class AnimalEntity(
     var health: String,
 
 ) {
+    //FINNE UT: definerer hvordan det vises
     override fun toString(): String {
         return "AnimalEntity(name='$name', id=$id, animalType='$animalType', breed='$breed', age=$age, health='$health')"
     }

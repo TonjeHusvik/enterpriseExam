@@ -2,6 +2,7 @@
 
 ## Users with login-info
 Plot in localhost:8080/api/login in Postman and choose one of these to log in with.
+
 | Username (email) | Password | 	Authority |
 |------------------|----------|------------|
 | `user@user.com`	 | pirate	  | User       |

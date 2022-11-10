@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:tc:postgresql:14.2-alpine:///localdevdb
+    username: localdevuser
+    password: pirate
+    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+  sql:
+    init:
+      platform: localdevdb
